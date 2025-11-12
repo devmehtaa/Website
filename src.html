@@ -1,1 +1,883 @@
-hi
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Backend Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #252525;
+            --accent: #00d4ff;
+            --accent-hover: #00b8e6;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --border-color: #333333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border: 2px solid var(--accent);
+            background-color: transparent;
+            color: var(--accent);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--accent);
+            color: var(--bg-primary);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--accent);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+        }
+
+        /* Story Section */
+        .story-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .story-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .story-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .story-text strong {
+            color: var(--accent);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background-color: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .skill-card h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .skill-card ul {
+            list-style: none;
+            color: var(--text-secondary);
+        }
+
+        .skill-card li {
+            padding: 0.25rem 0;
+        }
+
+        .skill-card li:before {
+            content: "▹ ";
+            color: var(--accent);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--bg-secondary);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .project-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .project-header h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-header .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .project-header .project-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .project-header .project-links a:hover {
+            color: var(--accent-hover);
+        }
+
+        .project-body {
+            padding: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .project-body p {
+            margin-bottom: 1rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background-color: var(--bg-tertiary);
+            color: var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Experience Section */
+        .experience-item {
+            background-color: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            border-left: 3px solid var(--accent);
+            border: 1px solid var(--border-color);
+        }
+
+        .experience-item h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-item .company {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-item .date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .experience-item ul {
+            list-style: none;
+            color: var(--text-secondary);
+            margin-left: 1rem;
+        }
+
+        .experience-item li {
+            padding: 0.5rem 0;
+        }
+
+        .experience-item li:before {
+            content: "▹ ";
+            color: var(--accent);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-content p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .contact-links a:hover {
+            color: var(--accent-hover);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        /* Scroll-triggered Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Apply animations to sections */
+        section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero section visible immediately */
+        .hero {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        .project-card,
+        .skill-card,
+        .experience-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .project-card.visible,
+        .skill-card.visible,
+        .experience-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Dev Mehta</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#story">Story</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Hi, I'm Dev</h1>
+            <p class="subtitle">Backend Software Developer</p>
+            <p class="description">
+                Passionate about building scalable and efficient backend systems while exploring machine learning and its applications in quantitative finance.
+            </p>
+            <div class="cta-buttons">
+                <a href="Dev_Mehta.pdf" target="_blank" download class="btn btn-primary">Resume</a>
+                <a href="mailto:devm2632@gmail.com" class="btn">Email Me</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>
+                    Hey there! 👋 I'm a <strong style="color: var(--accent);">junior at Penn State</strong> who's absolutely obsessed with building things that actually work (most of the time 😅).
+                </p>
+                <p>
+                    My go-to stack? <strong style="color: var(--accent);">Django</strong> for the backend (because Python is just so satisfying to type, and Django's ORM makes my life 10x easier), 
+                    <strong style="color: var(--accent);">React</strong> for the frontend (because who doesn't love component-based chaos?), and <strong style="color: var(--accent);">SQL</strong> 
+                    as my database of choice — I just can't help myself, it's like my default setting at this point.
+                </p>
+                <p>
+                    When I'm not building web apps, you'll find me grinding <strong style="color: var(--accent);">LeetCode contests</strong> in C++ (yeah, I know it's weird, 
+                    but something about C++ just clicks for competitive programming). Check out my <a href="https://leetcode.com/dev_mehta/" target="_blank" style="color: var(--accent); text-decoration: none;">LeetCode profile</a> if you're curious!
+                </p>
+                <p>
+                    I'm also diving headfirst into <strong style="color: var(--accent);">Machine Learning</strong> — currently working on something that might actually become a research paper 
+                    (fingers crossed 🤞). Plus, I've been deep-diving into <strong style="color: var(--accent);">DevOps</strong> ever since I had that "oh wait, how do I actually deploy this?" 
+                    moment a few months ago when I was working solo on a project. That was... educational. 😂
+                </p>
+            </div>
+            <div class="about-text">
+                <p>
+                    Beyond the code, I'm the <strong style="color: var(--accent);">President of the Computer Science Association</strong> at Penn State, 
+                    which basically means I get to nerd out with awesome people who also think debugging at 2 AM is a good time.
+                </p>
+                <p>
+                    I'm a bit of a competition junkie — give me a <strong style="color: var(--accent);">Kaggle competition</strong>, a hackathon (especially those intense 24-hour ones), 
+                    or a LeetCode contest, and I'm there. There's something addictive about the rush of solving problems under pressure.
+                </p>
+                <p>
+                    But honestly? What I love most is <strong style="color: var(--accent);">collaborating with fellow developers</strong> and just talking shop. 
+                    Whether it's discussing the latest framework, debating design patterns, or sharing war stories about that one bug that took 6 hours to find, 
+                    I'm always down for a good tech conversation.
+                </p>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- My Story Section -->
+    <section id="story">
+        <h2 class="section-title">My Story</h2>
+        <div class="story-content">
+            <div class="story-text">
+                <p>
+                    So, here's the thing — I didn't put much thought into choosing <strong style="color: var(--accent);">Computer Science</strong> as my major. 
+                    It just seemed like the right choice at the time. And honestly? I thought I'd never be able to code unless I worked <em>really</em> hard. 
+                    Classic freshman mindset, right? 😅
+                </p>
+                <p>
+                    Then, just a few weeks into my freshman year, something wild happened. My professor gave a free lecture and started this 
+                    <strong style="color: var(--accent);">arm wrestling challenge</strong> — beat him, and you get no assignments for the entire semester. 
+                    Obviously, we all tried. And then we started arm wrestling each other. It became this whole thing in class.
+                </p>
+                <p>
+                    But here's where it gets interesting (and slightly painful): during one of those arm wrestling battles, I was in this weird position 
+                    with my arm and elbow at a strange angle, and... <strong style="color: var(--accent);">I broke my humerus bone</strong>. 
+                    Yeah, that happened. 💀
+                </p>
+                <p>
+                    So there I was, stuck at home for <strong style="color: var(--accent);">3 months straight</strong> without my dominant hand working. 
+                    I couldn't write anything, couldn't go anywhere. I was basically a one-handed human for a quarter of a year. 
+                    That's when I had this realization: <em>"Well, I can still type..."</em>
+                </p>
+                <p>
+                    And that's how I discovered <strong style="color: var(--accent);">CS50</strong> — Harvard's intro to computer science course. 
+                    That course was a <strong style="color: var(--accent);">life-changing moment</strong> for me. I used to sit in front of my laptop 
+                    for <strong style="color: var(--accent);">14-15 hours a day</strong>, coding and watching lectures. Sometimes I'd rewatch the same 
+                    lecture three times, or spend <strong style="color: var(--accent);">2-3 days</strong> solving a single problem until I understood it 
+                    entirely — without any help. No shortcuts, no cheating. Just pure, stubborn determination.
+                </p>
+                <p>
+                    CS50 gave me the foundation and the nudge I needed to start. It got me <strong style="color: var(--accent);">really interested in coding</strong>, 
+                    and after that, I've been <strong style="color: var(--accent);">self-propelling</strong> and kept learning new technologies on my own. 
+                    What started as a way to pass time while my arm healed turned into a passion that defines who I am today.
+                </p>
+                <p style="margin-top: 2rem; font-style: italic; color: var(--accent); font-size: 1.1rem;">
+                    Sometimes the best things in life come from the most unexpected situations. A broken arm led me to discover my love for coding. 
+                    Talk about a silver lining! 
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3>Languages
+                    (By Prefference)</h3>
+                <ul>
+                    <li>C++/C</li>
+                    <li>Python</li>
+                    <li>Java</li>
+                    <li>Javascript(HTML/CSS)</li>
+                    <li>Golang</li>
+                    <li>Dart</li>
+                    <li>PHP</li>
+                    <li>Swift</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3>Frameworks & Libraries</h3>
+                <ul>
+                    <li>Node.js/Express.js</li>
+                    <li>Django/Flask</li>
+                    <li>React.js</li>
+                    <li>Angular</li>
+                    <li>React Native</li>
+                    <li>Flutter</li>
+                    <li>Tailwind CSS</li>
+                    <li>Bootstrap</li>
+                    <li>Material UI</li>
+                    <li>Pandas/NumPy/SciPy</li>
+                    <li>Scikit-learn</li>
+                    <li>Backtrader</li>
+                    <li>yFinance</li>
+                    <li>Selenium<li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3>Databases</h3>
+                <ul>
+                    <li>PostgreSQL</li>
+                    <li>MySQL</li>
+                    <li>MongoDB</li>
+                    <li>Redis</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3>Tools & Technologies</h3>
+                <ul>
+                    <li>Git & GitHub</li>
+                    <li>Docker</li>
+                    <li>Linux</li>
+                    <li>AWS</li>
+                    <li>CI/CD</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Smart Canteen Ordering System (SCOS)</h3>
+                    <div class="project-links">
+                        <a href="https://github.com/devmehtaa/SCOS" target="_blank">GitHub</a>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p>
+                        A hackathon project. Built as a full-stack web application 
+                        to decrease the waiting time in the canteen during peak hours.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">DJango</span>
+                        <span class="tech-tag">SQL</span>
+                        <span class="tech-tag">Hackathon</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Algorithmic Trading Bot</h3>
+                    <div class="project-links">
+                        <a href="https://github.com/devmehtaa/SMG-algo" target="_blank">GitHub</a>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p>
+                        An algorithmic trading bot that trades stocks based on Bollinger Bands Strategy. Used Selenium to execute the trades. yFinance to get the data. Backtrader to backtest the strategy. 
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Selenium</span>
+                        <span class="tech-tag">yFinance</span>
+                        <span class="tech-tag">Backtrader</span>
+                        <span class="tech-tag">Algorithms</span>
+                        <span class="tech-tag">Stock Market</span>
+                        <span class="tech-tag">Quantitative Finance</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2 class="section-title">Experience</h2>
+        <div class="experience-item">
+            <h3>Software Development Engineer</h3>
+            <div class="company">N Shashikant & Co (Family Business) · Mumbai, India</div>
+            <div class="date">August 2024 - Present</div>
+            <ul>
+                <li>Advise management on all technical and software-related decisions, ensuring alignment with business goals</li>
+                <li>Leading the development of a web-based ERP system using Django, React, and SQL, in collaboration with a freelance developer</li>
+                <li>Reduced manual data entry by 80% and cut customer turnaround time from 3 days to 1 day</li>
+            </ul>
+        </div>
+        <div class="experience-item">
+            <h3>Software Development Engineer Intern</h3>
+            <div class="company">Osource Global · Mumbai, India</div>
+            <div class="date">January 2025 - February 2025</div>
+            <ul>
+                <li>Built an OCR automation system using Amazon Textract and Regex to extract and parse text from images, auto-populating a SQL database and eliminating manual data entry</li>
+                <li>Optimized large Excel datasets with NumPy and Pandas, cleaning inconsistencies and streamlining ingestion pipelines to cut manual processing time by 80%</li>
+            </ul>
+        </div>
+        <div class="experience-item">
+            <h3>Software Development Engineer Intern</h3>
+            <div class="company">Yes Energy · Auckland, New Zealand</div>
+            <div class="date">August 2024 - October 2024</div>
+            <ul>
+                <li>Developed and maintained backend systems using Django, integrating data pipelines built with NumPy, Pandas, and Matplotlib (Pyplot) to process and visualize business data efficiently</li>
+                <li>Designed and deployed an interactive analytics dashboard that transformed static Excel reports into real-time, dynamic visualizations, improving business insight generation</li>
+                <li>Reduced manual reporting time by 60% while enabling data-driven decisions across multiple teams</li>
+            </ul>
+        </div>
+        <div class="experience-item">
+            <h3>Co-Founder and CTO</h3>
+            <div class="company">Vertech India · Mumbai, India</div>
+            <div class="date">May 2024 - July 2024</div>
+            <ul>
+                <li>Delivered 5+ professional websites within 3 months using modern web technologies, improving clients' online presence</li>
+                <li>Led a 4-member tech team (3 engineers, 1 designer), building and scaling products to achieve ₹40,000+ in revenue</li>
+                <li>Demonstrated strong project management and collaboration skills in a fast-paced startup environment</li>
+            </ul>
+        </div>
+        <div class="experience-item">
+            <h3>Founder & CEO</h3>
+            <div class="company">Devine Perfumes · Mumbai, India</div>
+            <div class="date">March 2018 - May 2019</div>
+            <ul>
+                <li>Founded a local perfume brand at age 13, conducting independent market research to identify niche opportunities in affordable fragrances</li>
+                <li>Achieved production of 5,000+ perfume units and generated over Rs.10,000 in gross revenue</li>
+                <li>Demonstrated early entrepreneurial spirit and business acumen</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-content">
+            <p>
+                I'm actively seeking internship opportunities for my junior year. 
+                If you're interested in working together or have any questions, feel free to reach out!
+            </p>
+            <div class="contact-links">
+                <a href="mailto:your.devm2632@gmail.com">Email</a>
+                <a href="https://www.linkedin.com/in/dev2632/" target="_blank">LinkedIn</a>
+                <a href="https://github.com/devmehtaa" target="_blank">GitHub</a>
+                <a href="Dev_Mehta.pdf" target="_blank">Resume</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Dev Mehta. Built with passion for backend development.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.backgroundColor = 'rgba(10, 10, 10, 0.98)';
+            } else {
+                nav.style.backgroundColor = 'rgba(10, 10, 10, 0.95)';
+            }
+        });
+
+
+        // Scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Observe project cards with staggered delay
+        document.querySelectorAll('.project-card').forEach((card, index) => {
+            observer.observe(card);
+            card.style.transitionDelay = `${index * 0.1}s`;
+        });
+
+        // Observe skill cards with staggered delay
+        document.querySelectorAll('.skill-card').forEach((card, index) => {
+            observer.observe(card);
+            card.style.transitionDelay = `${index * 0.1}s`;
+        });
+
+        // Observe experience items with staggered delay
+        document.querySelectorAll('.experience-item').forEach((item, index) => {
+            observer.observe(item);
+            item.style.transitionDelay = `${index * 0.15}s`;
+        });
+
+        // Make hero section visible immediately on load
+        window.addEventListener('load', function() {
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.classList.add('visible');
+            }
+        });
+    </script>
+</body>
+</html>
